@@ -1,5 +1,5 @@
 <div>
-  <img src="img/techflow-logo.png" alt="Logo TechFlow" width="170" align="left"> 
+  <img src="Base_TechFlow/img/techflow-logo.png" alt="Logo TechFlow" width="170" align="left"> 
   <h3>Tech-Flow</h3>
   <p>Somos uma equipe de desenvolvedores do ambiente acadêmico da UNIP de São José dos Campos. Nosso grupo é dedicado a aplicar conhecimento técnico de ponta na resolução de problemas práticos do mercado. Unimos uma base teórica sólida com uma abordagem ágil para transformar desafios em software, visando como produto um portal de chamados.</p>
   <br style="clear: both;" />
