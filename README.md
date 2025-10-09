@@ -10,3 +10,13 @@
 <p><strong>Proposta:</strong> 
 Visamos desenvolver um portal de chamados inteligente que visa otimizar o atendimento técnico e a comunicação entre clientes e atendentes. Utilizando Inteligência Artificial, o sistema realiza triagem automática, classificação de solicitações e sugere soluções para problemas frequentes, otimizando o tempo de resposta, melhor organização dos chamados e reduzindo a sobrecarga da equipe de TI.</p>
 
+##
+
+<div align="center">
+    <a href="Base_TechFlow/backlog.md">
+        <img src="https://img.shields.io/badge/Backlog-007bff?style=for-the-badge" height="35" alt="Backlog"/>
+    </a>
+    <a href="Base_TechFlow/sprints.md">
+        <img src="https://img.shields.io/badge/Sprints-28a745?style=for-the-badge" height="35" alt="Sprints"/>
+    </a>
+</div>
