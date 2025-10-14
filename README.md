@@ -9,14 +9,6 @@
 
 ---
 
-> Status do Projeto: Em Desenvolvimento 🛠️
->
-> Backlog Completo: [Visualizar](Base_TechFlow/backlog.md) 📋
->
-> Cronograma de Sprints: [Visualizar](Base_TechFlow/sprints.md) 📅
-
----
-
 ## Sobre a Tech-Flow <a id="sobre"></a>
 
 Somos uma equipe de desenvolvedores do ambiente acadêmico da UNIP de São José dos Campos. Nosso grupo é dedicado a aplicar conhecimento técnico de ponta na resolução de problemas práticos do mercado. Unimos uma base teórica sólida com uma abordagem ágil para transformar desafios em software, visando como produto um portal de chamados.
