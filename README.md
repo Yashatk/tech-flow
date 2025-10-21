@@ -4,7 +4,7 @@
   <br>
   <h2 align="center"> Tech-Flow | UNIP São José dos Campos</h2>
 
-  | [Sobre](#sobre) | [Proposta](#proposta) | [Backlog](#backlog) | [Tecnologias](#tecnologias) | [Estrutura](#estrutura) | [Como Usar](#como-usar) | [Equipe](#equipe) | [Cronograma](#cronograma) |
+  | [Sobre](#sobre) | [Proposta](#proposta) | [Backlog](#backlog) | [Cronograma](#cronograma) |  [Tecnologias](#tecnologias) | [Estrutura](#estrutura) | [Como Usar](#como-usar)  | [Equipe](#equipe) 
 </div>
 
 ---
@@ -46,6 +46,21 @@ Visamos desenvolver um **portal de chamados inteligente** que otimiza o atendime
 
 ---
 
+## Cronograma (Sprints) <a id="cronograma"></a>
+
+| Período da Sprint | Documentação da Sprint |
+| :--- | :---: |
+| **Sprint 1:** Fundação do Portal de Chamados - 05/08/2025 - 25/08/2025 | [link] |
+| **Sprint 2:** Interação e Status dos Chamados - 25/08/2025 - 01/09/2025 | [link] |
+| **Sprint 3:** Comunicação Cliente e Priorização - 01/09/2025 - 05/09/2025 | [link] |
+| **Sprint 4:** Busca e Início da Classificação - 05/09/2025 - 10/09/2025 | [link] |
+| **Sprint 5:** Filtros Avançados e Classificação (IA) - 14/09/2025 - 18/09/2025 | [link] |
+| **Sprint 6:** Histórico e Relatórios Iniciais - 20/09/2025 - 22/09/2025 | [link] |
+| **Sprint 7:** Exportação e Interface Responsiva - 23/09/2025 - 25/09/2025 | [link] |
+| **Sprint 8:** Acessibilidade, Segurança e Otimizações - 25/09/2025 - 01/10/2025 | [link] |
+
+---
+
 ## Tecnologias Utilizadas <a id="tecnologias"></a>
 
 * **Banco de Dados**: MySql
@@ -81,7 +96,7 @@ Para garantir o melhor aproveitamento do portal de chamados:
 * **4. Relatórios Detalhados**
     * **Análises completas** sobre desempenho e tempo de resposta.
 
----
+
 
 ## Equipe - TechFlow <a id="equipe"></a>
 
@@ -93,16 +108,3 @@ Para garantir o melhor aproveitamento do portal de chamados:
 | **Thiago Paulino da Silva** | Desenvolvedor | [@thiagooo9](https://github.com/thiagooo9) |
 
 ---
-
-## Cronograma (Sprints) <a id="cronograma"></a>
-
-| Período da Sprint | Documentação da Sprint |
-| :--- | :---: |
-| **Sprint 1:** Fundação do Portal de Chamados - 05/08/2025 - 25/08/2025 | [link] |
-| **Sprint 2:** Interação e Status dos Chamados - 25/08/2025 - 01/09/2025 | [link] |
-| **Sprint 3:** Comunicação Cliente e Priorização - 01/09/2025 - 05/09/2025 | [link] |
-| **Sprint 4:** Busca e Início da Classificação - 05/09/2025 - 10/09/2025 | [link] |
-| **Sprint 5:** Filtros Avançados e Classificação (IA) - 14/09/2025 - 18/09/2025 | [link] |
-| **Sprint 6:** Histórico e Relatórios Iniciais - 20/09/2025 - 22/09/2025 | [link] |
-| **Sprint 7:** Exportação e Interface Responsiva - 23/09/2025 - 25/09/2025 | [link] |
-| **Sprint 8:** Acessibilidade, Segurança e Otimizações - 25/09/2025 - 01/10/2025 | [link] |
