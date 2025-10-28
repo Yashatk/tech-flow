@@ -1,110 +1,230 @@
-<div align="center">
-  <h1 align="center"> Tech-Flow: Portal de Chamados Inteligente </h1>
-  <img src="Base_TechFlow/img/techflow-logo.png" alt="Logo TechFlow" width="170">
-  <br>
-  <h2 align="center"> Tech-Flow | UNIP São José dos Campos</h2>
+# TechFlow: Plataforma Inteligente de Gestão de Chamados
 
-  | [Sobre](#sobre) | [Proposta](#proposta) | [Backlog](#backlog) | [Cronograma](#cronograma) |  [Tecnologias](#tecnologias) | [Estrutura](#estrutura) | [Como Usar](#como-usar)  | [Equipe](#equipe) 
+<div align="center">
+<img src="Base_TechFlow/img/techflow-logo.png" alt="TechFlow Logo" width="200">
+
+<h3>Otimizando Suporte Técnico através de Inteligência Artificial</h3>
+
+**TechFlow | UNIP São José dos Campos**
+
 </div>
 
 ---
 
-## Sobre a Tech-Flow <a id="sobre"></a>
+# 🎯 Descrição do Desafio <a id="desafio"></a> </summary>
 
-Somos uma equipe de desenvolvedores do ambiente acadêmico da UNIP de São José dos Campos. Nosso grupo é dedicado a aplicar conhecimento técnico de ponta na resolução de problemas práticos do mercado. Unimos uma base teórica sólida com uma abordagem ágil para transformar desafios em software, visando como produto um portal de chamados.
+O parceiro enfrenta desafios significativos na gestão de suporte técnico, incluindo:
 
-## Proposta <a id="proposta"></a>
+- **📈 Volume crescente** de chamados sem triagem eficiente
+- **⏰ Tempo Médio de Resposta (TMR)** elevado devido à falta de automação
+- **🔗 Comunicação inadequada** entre usuários e equipe de suporte
+- **📊 Falta de métricas** para análise de desempenho e tomada de decisão
+- **🔄 Processos manuais** que consomem tempo da equipe especializada
 
-Visamos desenvolver um **portal de chamados inteligente** que otimiza o atendimento técnico e a comunicação entre clientes e atendentes. Utilizando **Inteligência Artificial**, o sistema realiza triagem automática, classificação de solicitações e sugere soluções para problemas frequentes, otimizando o tempo de resposta, melhor organização dos chamados e reduzindo a sobrecarga da equipe de TI.
-
----
-
-## Backlog do Produto <a id="backlog"></a>
-
-### **Épico 1: Cadastro e Autenticação**
-* *US01: Cadastro de Usuário Final* (5 SP)
-* *US02: Cadastro de Técnico/Atendente* (5 SP)
-* *US03: Autenticação de Login* (8 SP)
-
-### **Épico 2: Gestão de Chamados e Interações**
-* *US04: Alteração de status* (8 SP)
-* *US05: Comentários internos e externos* (13 SP)
-
-### **Épico 3: Priorização e Filtros Avançados**
-* *US06: Definição de prioridade* (5 SP)
-* *US07: Filtros por data, status, prioridade e categoria* (13 SP)
-
-### **Épico 4: Relatórios e Auditoria**
-* *US08: Log de alterações (auditoria)* (8 SP)
-* *US09: Relatórios de desempenho* (13 SP)
-
-### **Épico 5: Interface Responsiva e Acessibilidade**
-* *US10: Layout responsivo e acessível* (13 SP)
-
-### **Épico 6: Escalabilidade e Performance**
-* *US11: Otimizações de performance* (13 SP)
 
 ---
 
-## Cronograma (Sprints) <a id="cronograma"></a>
+<details>
+<summary> 📋 Backlog do Produto <a id="backlog"></a> </summary>
 
-| Período da Sprint | Documentação da Sprint |
-| :--- | :---: |
-| **Sprint 1:** Fundação do Portal de Chamados - 05/08/2025 - 25/08/2025 | [link] |
-| **Sprint 2:** Interação e Status dos Chamados - 25/08/2025 - 01/09/2025 | [link] |
-| **Sprint 3:** Comunicação Cliente e Priorização - 01/09/2025 - 05/09/2025 | [link] |
-| **Sprint 4:** Busca e Início da Classificação - 05/09/2025 - 10/09/2025 | [link] |
-| **Sprint 5:** Filtros Avançados e Classificação (IA) - 14/09/2025 - 18/09/2025 | [link] |
-| **Sprint 6:** Histórico e Relatórios Iniciais - 20/09/2025 - 22/09/2025 | [link] |
-| **Sprint 7:** Exportação e Interface Responsiva - 23/09/2025 - 25/09/2025 | [link] |
-| **Sprint 8:** Acessibilidade, Segurança e Otimizações - 25/09/2025 - 01/10/2025 | [link] |
+| Prioridade | User Story | Story Points | Sprint | Status |
+|------------|------------|--------------|---------|---------|
+| **Alta** | Como usuário final, quero me cadastrar no sistema para acessar a plataforma | 5 | 1 | ⬜ |
+| **Alta** | Como agente de suporte, quero me cadastrar para acessar funcionalidades de suporte | 5 | 1 | ⬜ |
+| **Alta** | Como usuário, quero fazer login para acessar funcionalidades conforme meu perfil | 8 | 1 | ⬜ |
+| **Alta** | Como agente, quero atualizar status dos chamados para manter usuários informados | 8 | 2 | ⬜ |
+| **Alta** | Como usuário, quero registrar comentários para comunicação clara do andamento | 13 | 2 | ⬜ |
+| **Média** | Como agente, quero definir prioridades para atender solicitações urgentes primeiro | 5 | 3 | ⬜ |
+| **Média** | Como usuário, quero filtrar chamados por data, status e categoria | 13 | 4 | ⬜ |
+| **Média** | Como admin, quero registro de todas as alterações para auditoria | 8 | 5 | ⬜ |
+| **Média** | Como admin, quero gerar relatórios de desempenho e métricas | 13 | 6 | ⬜ |
+| **Média** | Como usuário, quero interface responsiva para uso em qualquer dispositivo | 13 | 7 | ⬜ |
+| **Baixa** | Como admin, quero otimizações de performance para escalabilidade | 13 | 8 | ⬜ |
 
----
-
-## Tecnologias Utilizadas <a id="tecnologias"></a>
-
-* **Banco de Dados**: MySql
-* **Design de Interface**: Figma
-* **Linguagem Back-end**: Java (implícito na estrutura de pastas)
+</details>
 
 ---
 
-## 📂 Estrutura do Projeto <a id="estrutura"></a>
+<details>
+<summary> 🗓️ Cronograma do Projeto <a id="cronograma"></a> </summary>
 
-```text
-📁 techflow/
+```mermaid
+gantt
+    title Cronograma de Desenvolvimento - TechFlow
+    dateFormat  YYYY-MM-DD
+    section Sprints
+    Sprint 1 : 2025-08-05, 20d
+    Sprint 2 : 2025-08-25, 7d
+    Sprint 3 : 2025-09-01, 4d
+    Sprint 4 : 2025-09-05, 5d
+    Sprint 5 : 2025-09-14, 4d
+    Sprint 6 : 2025-09-20, 2d
+    Sprint 7 : 2025-09-23, 2d
+    Sprint 8 : 2025-09-25, 6d
+```
+
+</details>
+
+---
+
+<details>
+<summary> 📊 Detalhes das Sprints <a id="sprints"></a> </summary>
+
+| Período da Sprint | Documentação da Sprint | 
+|-------------------|------------------------|
+| **Sprint 1:** 05/08/2025 - 25/08/2025 | [📄 Documentação Sprint 1](link) |
+| **Sprint 2:** 25/08/2025 - 01/09/2025 | [📄 Documentação Sprint 2](link) |
+| **Sprint 3:** 01/09/2025 - 05/09/2025 | [📄 Documentação Sprint 3](link) |
+| **Sprint 4:** 05/09/2025 - 10/09/2025 | [📄 Documentação Sprint 4](link) |
+| **Sprint 5:** 14/09/2025 - 18/09/2025 | [📄 Documentação Sprint 5](link) |
+| **Sprint 6:** 20/09/2025 - 22/09/2025 | [📄 Documentação Sprint 6](link) |
+| **Sprint 7:** 23/09/2025 - 25/09/2025 | [📄 Documentação Sprint 7](link) |
+| **Sprint 8:** 25/09/2025 - 01/10/2025 | [📄 Documentação Sprint 8](link) |
+
+</details>
+
+---
+
+<details>
+<summary> 🛠️ Tecnologias Utilizadas <a id="tecnologias"></a> </summary>
+
+### Backend
+- **Java** - Linguagem principal
+- **Spring Boot** - Framework backend
+- **Microsoft SQL** - Banco de dados relacional
+
+### Frontend & Design
+- **HTML5/CSS3/JavaScript** - Interface web
+- **Figma** - Design e prototipagem
+- **Bootstrap** - Framework CSS
+
+### Ferramentas & DevOps
+- **Git** - Controle de versão
+- **Maven** - Gerenciamento de dependências
+- **Scrum** - Metodologia ágil
+
+</details>
+
+---
+
+<details>
+<summary> 📁 Estrutura do Projeto <a id="estrutura"></a> </summary>
+
+```
+techflow/
 ├── 📁 docs/
+│   ├── 📁 sprints/
+│   ├── 📁 requisitos/
+│   └── 📁 apresentacoes/
 ├── 📁 src/
 │   ├── 📁 main/
 │   │   ├── ☕ java/
+│   │   │   ├── 📁 controller/
+│   │   │   ├── 📁 service/
+│   │   │   ├── 📁 repository/
+│   │   │   ├── 📁 model/
+│   │   │   └── 📁 config/
 │   │   └── 📄 resources/
+│   │       ├── application.properties
+│   │       └── 📁 static/
 │   └── 📁 test/
+├── 📁 frontend/
+│   ├── 📁 css/
+│   ├── 📁 js/
+│   └── 📁 images/
+├── 📁 database/
+│   ├── schema.sql
+│   └── data.sql
 ├── 📜 .gitignore
+├── 📜 pom.xml
 └── 📄 README.md
 ```
 
-## Como Usar <a id="como-usar"></a>
-
-Para garantir o melhor aproveitamento do portal de chamados:
-
-* **1. Registro de Chamados**
-    * Os usuários podem **abrir chamados** descrevendo o problema e definindo a prioridade.
-* **2. Visualização e Gerenciamento**
-    * Atendentes podem visualizar, **editar** e **alterar status** dos chamados.
-* **3. Pesquisa e Filtros**
-    * Filtros avançados para buscar chamados por **status, prioridade, responsável, cliente, data** 🔍
-* **4. Relatórios Detalhados**
-    * **Análises completas** sobre desempenho e tempo de resposta.
-
-
-
-## Equipe - TechFlow <a id="equipe"></a>
-
-| Nome | Papel | GitHub |
-| :--- | :--- | :---: |
-| **Tainara Lais Viana Mota** | Product Owner | [@TainaraViana](https://github.com/TainaraViana) |
-| **André Takashi Prado Takamura** | Scrum Master | [@Yashatk](https://github.com/Yashatk) |
-| **Fabrício Santos Cavalcante** | Desenvolvedor | [@Kinnube](https://github.com/Kinnube) |
-| **Thiago Paulino da Silva** | Desenvolvedor | [@thiagooo9](https://github.com/thiagooo9) |
+</details>
 
 ---
+
+<details>
+  
+<summary> 📋 Guia de Utilização do Sistema <a id="como-usar"></a> </summary>
+
+### **Visão Geral**
+Este documento descreve o fluxo de utilização do portal de chamados, organizado por funcionalidades principais para otimizar sua experiência com o sistema.
+
+---
+
+### **1. Registro de Chamados**
+**Objetivo:** Criar novos chamados de forma eficiente e completa
+- Acesse a seção "Novo Chamado" no menu principal
+- Descreva o problema ou solicitação de forma clara e objetiva
+- Selecione a prioridade adequada conforme a urgência do caso
+- Anexe documentos complementares quando necessário
+
+### **2. Visualização e Gerenciamento**
+**Objetivo:** Acompanhar e gerenciar o ciclo de vida dos chamados
+- Visualize a lista completa de chamados em andamento
+- Acesse detalhes específicos de cada solicitação
+- Atualize o status conforme a evolução do atendimento
+- Realize edições e complementações quando necessário
+
+### **3. Pesquisa e Filtros Avançados**
+**Objetivo:** Localizar rapidamente chamados específicos
+- Utilize filtros por:
+  - **Status** (Aberto, Em Andamento, Resolvido, etc.)
+  - **Prioridade** (Baixa, Média, Alta, Urgente)
+  - **Responsável** pelo atendimento
+  - **Cliente** solicitante
+  - **Período** por data de abertura ou vencimento
+- Combine múltiplos filtros para refinamento preciso
+
+### **4. Relatórios e Análises**
+**Objetivo:** Acompanhar métricas e desempenho do serviço
+- Acesse relatórios de desempenho da equipe
+- Analise tempos médios de resposta e resolução
+- Visualize métricas de satisfação do cliente
+- Exporte dados para análise externa quando necessário
+
+---
+
+### **📞 Suporte**
+Em caso de dúvidas sobre a utilização do sistema, entre em contato com nossa equipe de suporte técnico.
+</details>
+
+---
+
+<details>
+<summary> 📂 Documentação <a id="documentacao"></a> </summary>
+
+[📁 Acessar Pasta de Documentação Completa](link_para_pasta_documentacao)
+
+A documentação completa do projeto inclui:
+- 📋 Documentação de requisitos
+- 🎨 Protótipos e wireframes
+- 📊 Diagramas de arquitetura
+- 🧪 Casos de teste
+- 📝 Relatórios de sprint
+
+</details>
+
+---
+
+<details>
+<summary> 👥 Equipe <a id="equipe"></a> </summary>
+
+| Nome | Papel | GitHub | LinkedIn |
+|------|-------|---------|----------|
+| **Tainara Lais Viana Mota** | Product Owner | [@TainaraViana](https://github.com/TainaraViana) | [LinkedIn](link) |
+| **André Takashi Prado Takamura** | Scrum Master | [@Yashatk](https://github.com/Yashatk) | [LinkedIn](link) |
+| **Fabrício Santos Cavalcante** | Desenvolvedor | [@Kinnube](https://github.com/Kinnube) | [LinkedIn](link) |
+| **Thiago Paulino da Silva** | Desenvolvedor | [@thiagooo9](https://github.com/thiagooo9) | [LinkedIn](link) |
+
+</details>
+
+---
+
+<div align="center">
+
+**TechFlow** - Transformando suporte técnico através da inovação  
+*Projeto Acadêmico - UNIP São José dos Campos*
+
+</div>
