@@ -1,0 +1,11 @@
+version: '2'
+services:
+  techflow:
+    container_name: techflow
+    image: nexus:8083/techflow:1.0.0
+    ports: 
+      - 9000:9000
+    volumes:
+      - /opt/techflow/application.yml:/application.yml
+    environment:
+      - TZ=America/Sao_Paulo

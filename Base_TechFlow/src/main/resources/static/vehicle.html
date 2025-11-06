@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veículos</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <script src="/js/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <!-- Sidebar -->
+  <div id="sidebar-container"></div>
+  <!-- Header -->
+  <div id="header-container"></div>
+  <div class="container my-5 main-content" :style="mainContentStyle">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h5 class="mb-0">Veículos</h5>
+      <div class="d-flex align-items-center">
+        <button class="btn btn-sm btn-orange me-3" @click="reloadData">
+          <i class="bi bi-arrow-clockwise me-1"></i>Atualizar
+        </button>
+        <button v-if="searchText" class="btn btn-sm btn-outline-secondary" @click="searchText = ''">
+          <i class="bi bi-x-circle me-1"></i>Limpar filtros
+        </button>
+      </div>
+    </div>
+    
+    <div class="card mb-4" :class="{'bg-dark text-white border-secondary': theme === 'dark'}">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label class="form-label"></label>
+            <div class="input-group">
+              <span class="input-group-text" :class="{'bg-dark text-white border-secondary': theme === 'dark'}">
+                <i class="bi bi-search"></i>
+              </span>
+              <input type="text" class="form-control" v-model="searchText" placeholder="Digite para pesquisar..."
+                     :class="{'bg-dark text-white border-secondary': theme === 'dark'}">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    <!-- Summary information showing total and filtered count -->
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <div :class="{'text-muted': theme === 'light', 'text-light': theme === 'dark'}">
+        <span v-if="!loading">
+          Mostrando {{ filteredVehicles.length }} de {{ totalItems }} veículos
+          <span v-if="searchText" class="fst-italic"> (filtros aplicados)</span>
+        </span>
+      </div>
+    </div>
+      
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped" :class="{'table-dark': theme === 'dark'}" id="vehicleTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th @click="sortBy('id')" style="cursor: pointer">
+                  ID
+                  <span v-if="sortKey === 'id'">
+                    <i :class="['bi', sortOrder === 'asc' ? 'bi-sort-up' : 'bi-sort-down']"></i>
+                  </span>
+                </th>
+                <th @click="sortBy('plate')" style="cursor: pointer">
+                  Placa
+                  <span v-if="sortKey === 'plate'">
+                    <i :class="['bi', sortOrder === 'asc' ? 'bi-sort-up' : 'bi-sort-down']"></i>
+                  </span>
+                </th>
+                <th @click="sortBy('modelName')" style="cursor: pointer">
+                  Modelo
+                  <span v-if="sortKey === 'modelName'">
+                    <i :class="['bi', sortOrder === 'asc' ? 'bi-sort-up' : 'bi-sort-down']"></i>
+                  </span>
+                </th>
+                <th width="100">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-if="loading">
+                <td colspan="4" class="text-center py-3">
+                  <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                  Carregando dados...
+                </td>
+              </tr>
+              <tr v-else-if="filteredVehicles.length === 0">
+                <td colspan="4" class="text-center py-3">
+                  Nenhum veículo encontrado
+                </td>
+              </tr>
+              <tr v-for="vehicle in filteredVehicles" :key="vehicle.id">
+                <td>{{ vehicle.id }}</td>
+                <td>{{ vehicle.plate }}</td>
+                <td>{{ vehicle.modelName || '-' }}</td>
+                <td>
+                  <button class="btn btn-sm btn-orange me-1" @click="editVehicle(vehicle)">
+                    <i class="bi bi-pencil-square"></i> Editar
+                  </button>
+                  <!--
+                  <button class="btn btn-sm btn-orange" @click="confirmDelete(vehicle)">
+                    <i class="bi bi-trash"></i> Excluir
+                  </button>
+                  -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div v-if="loading" class="text-center my-3">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only"></span>
+          </div>
+        </div>
+        <div v-if="error" class="alert alert-danger mt-3">{{ error }}</div>
+        
+        <!-- Pagination Controls -->
+        <div v-if="!loading && totalPages > 1" class="d-flex justify-content-between align-items-center mt-3">
+          <div class="d-flex align-items-center">
+            <label class="me-2">Itens por página:</label>
+            <select v-model="pageSizeSelect" class="form-select form-select-sm" style="width: 70px;" @change="changePageSize">
+              <option v-for="size in pageSizeOptions" :key="size" :value="size">{{ size }}</option>
+            </select>
+          </div>
+          <nav aria-label="Navegação de páginas">
+            <ul class="pagination pagination-sm mb-0">
+              <li class="page-item" :class="{ disabled: currentPage === 1 }">
+                <a class="page-link" href="#" @click.prevent="changePage(1)" aria-label="Primeira">
+                  <i class="bi bi-chevron-double-left"></i>
+                </a>
+              </li>
+              <li class="page-item" :class="{ disabled: currentPage === 1 }">
+                <a class="page-link" href="#" @click.prevent="changePage(currentPage - 1)" aria-label="Anterior">
+                  <i class="bi bi-chevron-left"></i>
+                </a>
+              </li>
+              
+              <li v-for="page in displayedPageNumbers" :key="page" class="page-item" :class="{ active: currentPage === page }">
+                <a class="page-link" href="#" @click.prevent="changePage(page)">{{ page }}</a>
+              </li>
+              
+              <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+                <a class="page-link" href="#" @click.prevent="changePage(currentPage + 1)" aria-label="Próxima">
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </li>
+              <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+                <a class="page-link" href="#" @click.prevent="changePage(totalPages)" aria-label="Última">
+                  <i class="bi bi-chevron-double-right"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div>
+            Página {{ currentPage }} de {{ totalPages }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const SYS_PAGE_NAME="vehicle.html";
+const SYS_MENU_ID="menu-vehicle";
+
+const app = new Vue({
+  el: '#app',
+  data: {
+    theme: localStorage.getItem('centaura-theme') || 'light',
+    vehicles: [],
+    loading: false,
+    error: null,
+    currentPage: 1,
+    currentClientPage: 1,
+    pageSize: 100,
+    pageSizeSelect: 100,
+    pageSizeOptions: [5, 10, 25, 50, 100],
+    totalItems: 0,
+    searchText: '',
+    sortKey: 'id',
+    sortOrder: 'asc'
+  },
+  computed: {
+    mainContentStyle() {
+      return {
+        paddingTop: '50px',
+        marginLeft: document.body.classList.contains('sidebar-hidden') ? '0' : '220px',
+        transition: 'margin-left 0.2s'
+      };
+    },
+    filteredVehicles() {
+      // First filter the items based on search text
+      let filteredItems;
+      if (!this.searchText || this.searchText.trim() === '') {
+        filteredItems = this.vehicles;
+      } else {
+        const searchTerm = this.searchText.toLowerCase().trim();
+        filteredItems = this.vehicles.filter(item => {
+          return (
+            (item.plate && item.plate.toLowerCase().includes(searchTerm)) ||
+            (item.modelName && item.modelName.toLowerCase().includes(searchTerm)) ||
+            (item.id && String(item.id).includes(searchTerm))
+          );
+        });
+      }
+      
+      // Then sort the filtered items
+      const sortedItems = this.sortItems(filteredItems, this.sortKey, this.sortOrder);
+      
+      // Apply client-side pagination if searching
+      if (this.searchText) {
+        const start = (this.currentClientPage - 1) * this.pageSize;
+        const end = start + this.pageSize;
+        return sortedItems.slice(start, end);
+      }
+      
+      return sortedItems;
+    },
+    totalPages() {
+      if (this.searchText) {
+        // If searching, calculate based on filtered items before pagination
+        const totalItems = this.vehicles.filter(item => {
+          const searchTerm = this.searchText.toLowerCase().trim();
+          return (
+            (item.plate && item.plate.toLowerCase().includes(searchTerm)) ||
+            (item.modelName && item.modelName.toLowerCase().includes(searchTerm)) ||
+            (item.id && String(item.id).includes(searchTerm))
+          );
+        }).length;
+        return Math.max(1, Math.ceil(totalItems / this.pageSize));
+      } else {
+        // Use total rows from API response
+        return Math.max(1, Math.ceil(this.totalItems / this.pageSize));
+      }
+    },
+    displayedPageNumbers() {
+      const pages = [];
+      const maxVisible = 5; // Maximum number of page numbers to show
+      
+      // Calculate range of pages to display
+      let startPage = Math.max(1, this.currentPage - Math.floor(maxVisible / 2));
+      let endPage = Math.min(this.totalPages, startPage + maxVisible - 1);
+      
+      // Adjust start page if we're near the end
+      if (endPage - startPage + 1 < maxVisible && startPage > 1) {
+        startPage = Math.max(1, endPage - maxVisible + 1);
+      }
+      
+      // Generate page numbers
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+      
+      return pages;
+    }
+  },
+  methods: {
+    sortBy(key) {
+      // If already sorting by this key, reverse the order
+      if (this.sortKey === key) {
+        this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+      } else {
+        // Otherwise, set new key and default to ascending
+        this.sortKey = key;
+        this.sortOrder = 'asc';
+      }
+    },
+    
+    sortItems(items, key, order) {
+      return [...items].sort((a, b) => {
+        // Handle nested properties (e.g., 'parent.name')
+        let aValue, bValue;
+        
+        if (key.includes('.')) {
+          const parts = key.split('.');
+          aValue = a;
+          bValue = b;
+          
+          for (const part of parts) {
+            aValue = aValue ? aValue[part] : undefined;
+            bValue = bValue ? bValue[part] : undefined;
+          }
+        } else {
+          aValue = a[key];
+          bValue = b[key];
+        }
+        
+        // Handle nulls/undefined
+        if (aValue === undefined || aValue === null) aValue = '';
+        if (bValue === undefined || bValue === null) bValue = '';
+        
+        // Handle numeric sorting
+        if (!isNaN(aValue) && !isNaN(bValue)) {
+          return order === 'asc' ? aValue - bValue : bValue - aValue;
+        }
+        
+        // Handle string sorting
+        aValue = String(aValue).toLowerCase();
+        bValue = String(bValue).toLowerCase();
+        
+        if (aValue < bValue) return order === 'asc' ? -1 : 1;
+        if (aValue > bValue) return order === 'asc' ? 1 : -1;
+        return 0;
+      });
+    },
+    
+    fetchVehicles() {
+      this.loading = true;
+      this.error = null;
+      
+      fetch(`api/vehicle?page=${this.currentPage}&pageSize=${this.pageSize}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Erro ao carregar dados da API');
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data && data.obj) {
+            this.vehicles = data.obj;
+            // Get total rows from data.totalRows
+            if (data.totalRows !== undefined) {
+              this.totalItems = data.totalRows;
+            } else {
+              // Fallback to array length if totalRows is not available
+              this.totalItems = this.vehicles.length;
+            }
+            console.log('Vehicles loaded:', this.vehicles);
+          } else {
+            this.vehicles = [];
+            this.totalItems = 0;
+            console.log('No vehicles found or invalid response format');
+          }
+          this.loading = false;
+        })
+        .catch(err => {
+          this.error = `Erro ao carregar dados: ${err.message}`;
+          this.loading = false;
+          console.error('API Error:', err);
+        });
+    },
+    reloadData() {
+      this.currentPage = 1;
+      this.currentClientPage = 1;
+      this.fetchVehicles();
+    },
+    changePage(page) {
+      if (page < 1 || page > this.totalPages || page === this.currentPage) return;
+      
+      if (this.searchText) {
+        // If searching, handle pagination client-side
+        this.currentClientPage = page;
+      } else {
+        // Otherwise, fetch from server
+        this.currentPage = page;
+        this.fetchVehicles();
+      }
+    },
+    changePageSize(event) {
+      this.pageSize = this.pageSizeSelect;
+      this.currentPage = 1;
+      this.currentClientPage = 1;
+      this.fetchVehicles();
+    },
+    editVehicle(vehicle) {
+      console.log('Edit vehicle:', vehicle);
+      // Implement edit functionality here
+      alert('Editar veículo: ' + vehicle.plate);
+    },
+    confirmDelete(vehicle) {
+      if (confirm(`Deseja realmente excluir o veículo "${vehicle.plate}"?`)) {
+        console.log('Delete vehicle:', vehicle);
+        // Implement delete functionality here
+      }
+    }
+  },
+  mounted() {
+    document.body.className = this.theme;
+    this.fetchVehicles();
+  }
+});
+
+</script>
+<script src="header.js"></script>
+<style>
+  th[style="cursor: pointer"]:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .table-dark th[style="cursor: pointer"]:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  th .bi-sort-up, th .bi-sort-down {
+    margin-left: 5px;
+    font-size: 0.8em;
+  }
+</style>
+</body>
+</html>

@@ -1,0 +1,53 @@
+server:
+  port: '8089'
+spring:
+  datasource:
+    hikari:
+      validation-timeout: '3000'
+      data-source-properties:
+        useServerPrepStmts: 'true'
+        cacheResultSetMetadata: 'true'
+        cacheServerConfiguration: 'true'
+        cachePrepStmts: 'true'
+        rewriteBatchedStatements: 'true'
+        elideSetAutoCommits: 'true'
+        useLocalSessionState: 'true'
+        prepStmtCacheSize: '250'
+        maintainTimeStats: 'false'
+        prepStmtCacheSqlLimit: '2048'
+      idle-timeout: '60000'
+      maximum-pool-size: '5'
+      isolate-internal-queries: 'true'
+      connection-timeout: '30000'
+      initialization-fail-timeout: '2000'
+      max-lifetime: '1800000'
+      connection-test-query: SELECT 1
+      minimum-idle: '8'
+    
+    url: jdbc:sqlserver://;serverName=localhost;port=11433;databaseName=techflow;encrypt=true;trustServerCertificate=true
+    username: sa
+    password: SqlS3rv3r@Alienware
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+  servlet:
+    multipart:
+      enabled: 'true'
+      max-file-size: 200MB
+      max-request-size: 215MB
+      file-size-threshold: 2KB
+  mvc:
+    format:
+      date-time: iso
+  messages:      
+    encoding: UTF-8
+    basename: messages
+    
+logging:
+  level:
+    com.techflow: debug
