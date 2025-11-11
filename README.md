@@ -1,7 +1,7 @@
 # TechFlow: Plataforma Inteligente de Gestão de Chamados
 
 <div align="center">
-<img src="Base_TechFlow/img/techflow-logo.png" alt="TechFlow Logo" width="200">
+<img src="Base_TechFlow/docs/database/TechflowLogo.png" alt="TechFlow Logo" width="200">
 
 <h3>Otimizando Suporte Técnico através de Inteligência Artificial</h3>
 
