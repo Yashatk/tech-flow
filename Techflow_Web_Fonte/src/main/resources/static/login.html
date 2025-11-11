@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechFlow</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/vue.min.js"></script>  
+</head>
+<body>
+<div class="background-overlay"></div>
+<div id="app">
+  <div class="main-content d-flex justify-content-center align-items-center" :style="mainContentStyle">
+    <div class="login-panel d-flex" style="background: rgba(255,255,255,0.35); border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37); backdrop-filter: blur(8px); width: 700px; min-height: 400px;">
+
+      <div class="logo-container d-flex align-items-center justify-content-center" style="width: 180px;">
+        <img src="/img/logo.png" alt="Logo" style="max-width: 150px; max-height: 150px;">
+      </div>
+      <div class="form-container flex-grow-1 d-flex flex-column justify-content-center p-4">
+        <form>
+          <div class="mb-3">
+            <label for="username" class="form-label">Usuário</label>
+            <input type="text" class="form-control" id="username" placeholder="Digite seu usuário">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="password" placeholder="Digite sua senha">
+          </div>
+          <button type="submit" class="btn btn-outline-light text-white w-100">Login</button>
+        </form>
+            <div id="login-message" class="mt-3 text-center text-white" style="min-height: 24px; font-size: 1.1rem;">{{ loginMessage }}</div>
+          </div>
+          <div class="panel-footer text-center text-white w-100 pb-2" style="position: absolute; bottom: 0; left: 0; font-size: 1rem;">@2025 Techflow</div>
+    </div>
+  </div>
+</div>
+<script>
+
+const app = new Vue({
+  el: '#app',
+  data: {
+    //theme: localStorage.getItem('centaura-theme') || 'light',
+    loginMessage: ''
+  },
+  computed: {
+    mainContentStyle() {
+      return {
+        paddingTop: '50px',
+        marginLeft: document.body.classList.contains('sidebar-hidden') ? '0' : '220px',
+        transition: 'margin-left 0.2s'
+      };
+    }
+  },
+  mounted() {
+    document.body.className = this.theme;
+    // Add login form handler
+    const form = document.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        this.loginMessage = '';
+        try {
+          const response = await fetch(`/api/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
+          const data = await response.json();
+          if (data && data.obj) {
+            localStorage.setItem('techflow_session', JSON.stringify(data.obj));
+            this.loginMessage = 'Login realizado com sucesso! Redirecionando...';
+            setTimeout(() => {
+              window.location.href = 'ticket.html';
+            }, 900);
+          } else {
+            this.loginMessage = data.message || 'Usuário ou senha inválidos.';
+          }
+        } catch (err) {
+          this.loginMessage = 'Erro ao conectar ao servidor.';
+        }
+      });
+    }
+  }
+});
+
+</script>
+<style>
+body {
+  background: url('/img/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+}
+
+.main-content {
+  align-items: flex-start !important;
+  position: relative;
+  z-index: 1;
+}
+
+.login-panel {
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.8);
+}
+
+.form-label {
+  color: #fff !important;
+}
+
+.btn-outline-light {
+  border-color: #fff !important;
+  color: #fff !important;
+}
+
+</style>
+</body>
+</html>
+
